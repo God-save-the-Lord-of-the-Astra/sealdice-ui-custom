@@ -1,15 +1,9 @@
 <template>
   <div>
-    <div class="img-box">
-      <img :src="imgHaibao" />
-    </div>
     <div style="text-align: left; line-height: 2rem; font-size: .8rem;">
       <div class="top-item"><span style="font-weight: 600;">当前版本: {{ store.curDice.baseInfo.version }}</span></div>
-      <div class="top-item"><span style="font-weight: 600;">最新版本: {{ store.curDice.baseInfo.versionNew }}</span></div>
       <div class="top-item" style="font-family: sans-serif;margin-top: 1rem;">官方网站: <el-link type="primary" target="_blank" href="https://www.sealdice.com">https://www.sealdice.com</el-link></div>
       <div class="top-item" style="font-family: sans-serif;">使用手册: <el-link type="primary" target="_blank" href="https://dice.weizaima.com/manual/">https://dice.weizaima.com/manual/</el-link></div>
-      <div class="top-item" style="font-family: sans-serif;">投喂海豹: <el-link type="primary" target="_blank" href="https://dice.weizaima.com/feed/">https://dice.weizaima.com/feed/</el-link></div>
-      <div class="top-item" style="font-family: sans-serif;">源码: <el-link type="primary" target="_blank" href="https://github.com/sealdice/sealdice-core/">https://github.com/sealdice/sealdice-core</el-link></div>
       <div class="top-item">
         <div style="margin-top: 5rem; font-family: sans-serif;">
         </div>
@@ -21,6 +15,14 @@
   <div style="text-align: center; font-size: small; margin-bottom: 2rem; font-family: sans-serif;">特别鸣谢参与测试、反馈问题，帮助完善海豹指令的各位！以下列出感谢名单（排名不分先后）</div>
   <div class="about">
     <div></div>
+    <div class="subtitle">船新开发</div>
+
+    <div style="margin-top: 2rem;" class="subtitle">V1.5 custom</div>
+    <div class="developers">
+      <el-link :underline="false" href="https://github.com/xin-yu13" target="_blank"><el-avatar shape="circle" :size="50" src="http://q1.qlogo.cn/g?b=qq&nk=3381409271&s=100"/>星界之主</el-link>
+      <el-link :underline="false" href="https://github.com/BegoniaHe" target="_blank"><el-avatar shape="circle" :size="50" src="http://q1.qlogo.cn/g?b=qq&nk=1507533037&s=100"/>赞美星界bot</el-link>
+    </div>
+    
     <div class="subtitle">社区协力</div>
 
     <div style="margin-top: 2rem;" class="subtitle">V1.5 版本</div>
@@ -161,7 +163,9 @@ onBeforeUnmount(() => {
 .img-box {
   height: 250px;
   margin-right: 3rem;
-  float: left;
+  display: flex; /* Use 'display: flex' instead of 'float: left' */
+  align-items: center; /* Center the image vertically */
+  justify-content: center; /* Center the image horizontally */
 
   img {
     height: 200px;

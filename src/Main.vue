@@ -81,9 +81,8 @@
           </span>
         </el-space>
 
-        <el-tag effect="dark" size="small" disable-transitions
-                :type="store.curDice.baseInfo.appChannel === 'stable' ? 'success' : 'info'">
-          {{ store.curDice.baseInfo.appChannel === 'stable' ? '正式版' : '测试版' }}
+        <el-tag effect="dark" size="small" disable-transitions>
+          {{ '正式版' }}
         </el-tag>
       </div>
     </template>
@@ -103,18 +102,6 @@
     <div>如果失去响应过久，请登录服务器处理</div>
   </el-dialog>
 
-  <el-dialog v-model="dialogFeed" :close-on-click-modal="false" :close-on-press-escape="false" class="dialog-feed"
-             :show-close="false">
-    <template #header="{ close, titleId, titleClass }">
-      <div class="my-header">
-        <h4 :id="titleId" :class="titleClass" style="margin: 0.5rem">海豹新闻</h4>
-        <el-button type="success" :icon="Check" @click="checkNews(close)">确认已读</el-button>
-      </div>
-    </template>
-
-    <div style="text-align: left;" v-html="newsData">
-    </div>
-  </el-dialog>
 </template>
 
 <script setup lang="ts">
@@ -147,27 +134,7 @@ const dialogFeed = ref(false)
 const newsData = ref(`<div>暂无内容</div>`)
 const newsChecked = ref(true)
 const newsMark = ref('')
-const checkNews = async (close: any) => {
-  console.log('newsMark', newsMark.value)
-  const ret = await store.checkNews(newsMark.value)
-  if (ret?.result) {
-    ElMessage.success('已阅读最新的海豹新闻')
-  } else {
-    ElMessage.error('阅读海豹新闻失败')
-  }
-  await updateNews()
-  close()
-}
-const updateNews = async () => {
-  const newsInfo = await store.news()
-  if (newsInfo.result) {
-    newsData.value = newsInfo.news
-    newsChecked.value = newsInfo.checked
-    newsMark.value = newsInfo.newsMark
-  } else {
-    ElMessage.error(newsInfo?.err ?? '获取海豹新闻失败')
-  }
-}
+
 
 const showDialog = computed(() => {
   return !store.canAccess
@@ -217,8 +184,6 @@ onBeforeMount(async () => {
       }
     }
   }, 5000) as any
-
-  await updateNews()
 
   const conf = await store.diceAdvancedConfigGet()
   if (conf.show) {

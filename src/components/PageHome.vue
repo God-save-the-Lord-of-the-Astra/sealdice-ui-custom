@@ -3,19 +3,6 @@
     <el-button type="default" class="btn-scrolldown" :icon="CaretBottom" circle @click="scrollDown" content="最新日志"></el-button>
   </Teleport>
 
-  <div style="display: flex; justify-content: flex-end; align-items: center">
-    <div style="display: flex; flex-direction: column;">
-      <el-tooltip v-if="store.curDice.baseInfo.versionCode < store.curDice.baseInfo.versionNewCode && store.curDice.baseInfo.containerMode"
-                  content="容器模式下禁止直接更新，请手动拉取最新镜像">
-        <el-button type="primary" disabled>升级新版</el-button>
-      </el-tooltip>
-      <el-button v-else-if="store.curDice.baseInfo.versionCode < store.curDice.baseInfo.versionNewCode"
-                 type="primary" @click="upgradeDialogVisible = true">
-        升级新版
-      </el-button>
-    </div>
-  </div>
-
   <h4>状态</h4>
   <div class="flex flex-col justify-center gap-4">
     <div class="flex items-center flex-wrap gap-1">
@@ -129,13 +116,10 @@
   </el-table>
 
   <el-dialog v-model="upgradeDialogVisible" title="升级新版本" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="true" class="the-dialog">
-    <!-- <el-checkbox v-model="importOnlyCurrent">仅当前页面(勾选)/全部自定义文案</el-checkbox> -->
-    <!-- <el-checkbox v-model="importImpact">紧凑</el-checkbox> -->
 
     <el-link style="font-size: 16px; font-weight: bolder;" type="primary" href="https://dice.weizaima.com/changelog" target="_blank">查看更新日志</el-link>
 
     <div>请及时更新海豹到最新版本，这意味着功能增加和BUG修复。</div>
-    <div>当然，在更新前最好看看右上角的海豹新闻，通常会很有帮助。</div>
     <div>在操作之前，最好能确保你目前可以接触到服务器，以防万一需要人工干预。</div>
     <div><b>如果升级后无法启动，请删除海豹目录中的"update"、"auto_update.exe"并手动进行升级</b></div>
     <div><b>进一步的内容请查阅届时自动生成的“升级失败指引”或加群询问。</b></div>
